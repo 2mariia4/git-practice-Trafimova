@@ -1,0 +1,422 @@
+Шпоргалка
+
+1. НАСТРОЙКА GIT
+
+# Проверка версии Git
+git version
+
+# Настройка имени пользователя (глобально)
+git config --global user.name "ваш_ник"
+
+# Настройка email (глобально)
+git config --global user.email "ваша_почта@yandex.ru"
+
+# Просмотр всех настроек
+git config --list
+
+# Просмотр конкретной настройки
+git config --global user.name
+
+2. СОЗДАНИЕ И ИНИЦИАЛИЗАЦИЯ РЕПОЗИТОРИЯ
+
+# Переход в папку с проектом
+cd Documents/Lab2_ISRPO_Иванов
+
+# Создание папки проекта
+mkdir backend
+
+# Переход в папку
+cd backend
+
+# Инициализация репозитория с веткой main
+git init -b main
+
+# Проверка текущего пути
+pwd
+
+# Просмотр содержимого папки (включая скрытые)
+ls -la
+
+3. ПРОВЕРКА СОСТОЯНИЯ РЕПОЗИТОРИЯ
+
+# Статус репозитория
+git status
+
+# Краткий статус
+git status -s
+
+# Просмотр подключённых удалённых репозиториев
+git remote -v
+
+4. ДОБАВЛЕНИЕ ФАЙЛОВ В ИНДЕКС (STAGING)
+
+# Добавить конкретный файл
+git add README.md
+
+# Добавить все файлы
+git add .
+
+# Добавить все файлы с определённым расширением
+git add *.cs
+
+# Убрать файл из индекса (без удаления)
+git restore --staged README.md
+
+# Удалить файл из индекса и с диска
+git rm README.md
+
+5. СОЗДАНИЕ КОММИТОВ
+
+# Создать коммит с сообщением
+git commit -m "Initial commit: add README.md"
+
+# Создать коммит с добавлением всех изменённых файлов
+git commit -am "Update files"
+
+# Изменить последний коммит (сообщение или добавить файлы)
+git commit --amend -m "New message"
+
+# Просмотр истории коммитов
+git log
+
+# Компактный просмотр истории
+git log --oneline
+
+# Просмотр последних N коммитов
+git log -n 3
+
+# Просмотр истории с графиком веток
+git log --oneline --graph --all
+
+# Детальный просмотр конкретного коммита
+git show a1b2c3d
+
+6. РАБОТА С ВЕТКАМИ
+
+# Просмотр всех локальных веток
+git branch
+
+# Просмотр всех веток (включая удалённые)
+git branch -a
+
+# Создание новой ветки (без переключения)
+git branch feature
+
+# Создание и переключение на новую ветку (старый способ)
+git checkout -b feature
+
+# Создание и переключение на новую ветку (новый способ)
+git switch -c feature
+
+# Переключение на существующую ветку (старый способ)
+git checkout main
+
+# Переключение на существующую ветку (новый способ)
+git switch main
+
+# Переключение на предыдущую ветку
+git switch -
+
+# Удаление ветки (если изменения слиты)
+git branch -d feature
+
+# Принудительное удаление ветки
+git branch -D feature
+
+# Переименование текущей ветки
+git branch -m new-name
+
+7. РАБОТА С УДАЛЁННЫМ РЕПОЗИТОРИЕМ
+
+# Добавить удалённый репозиторий
+git remote add origin https://gitflic.ru/project/user/repo.git
+
+# Просмотр удалённых репозиториев
+git remote -v
+
+# Удалить удалённый репозиторий
+git remote remove origin
+
+# Переименовать удалённый репозиторий
+git remote rename origin old-origin
+
+# Первая отправка ветки main с привязкой
+git push -u origin main
+
+# Отправка изменений в текущую ветку
+git push
+
+# Отправка конкретной ветки
+git push origin feature
+
+# Принудительная отправка (осторожно!)
+git push --force
+
+# Отправка всех веток
+git push --all
+
+# Отправка тегов
+git push --tags
+
+# Получение изменений с сервера (без слияния)
+git fetch
+
+# Получение с удалением несуществующих веток
+git fetch --prune
+
+# Получение и слияние изменений
+git pull
+
+# Получение и слияние для конкретной ветки
+git pull origin main
+
+# Клонирование репозитория
+git clone https://gitflic.ru/project/user/repo.git
+
+8. ФАЙЛ .gitignore
+
+# Пример содержимого .gitignore для C#/.NET:
+bin/
+obj/
+.vs/
+*.user
+*.suo
+
+# Пример для Python:
+__pycache__/
+*.pyc
+venv/
+.env
+
+# Пример для Node.js:
+node_modules/
+dist/
+*.log
+
+# Проверка, какие файлы игнорируются
+git status --ignored
+
+# Проверка конкретного файла
+git check-ignore -v bin/
+
+9. СЛИЯНИЕ ВЕТОК И PULL REQUEST
+
+# Слияние ветки feature в текущую (main)
+git merge feature
+
+# Слияние с созданием коммита слияния
+git merge --no-ff feature
+
+# Слияние с squash (один коммит)
+git merge --squash feature
+
+# Отмена слияния
+git merge --abort
+
+# Просмотр различий между ветками
+git diff main..feature
+
+# Просмотр различий между коммитами
+git diff a1b2c3d..b2c3d4e
+
+# Просмотр различий для конкретного файла
+git diff HEAD -- Program.cs
+
+10. ОТМЕНА ИЗМЕНЕНИЙ И ВОССТАНОВЛЕНИЕ
+
+# Отменить изменения в рабочем файле (до последнего коммита)
+git restore Program.cs
+
+# Отменить изменения в индексе
+git restore --staged Program.cs
+
+# Отменить последний коммит (сохранить изменения)
+git reset --soft HEAD~1
+
+# Отменить последний коммит (удалить изменения)
+git reset --hard HEAD~1
+
+# Отменить коммит, создав новый (безопасно)
+git revert a1b2c3d
+
+# Просмотр всех действий (для восстановления)
+git reflog
+
+# Восстановление после неудачного reset
+git reset --hard HEAD@{2}
+
+11. ПРОСМОТР ИНФОРМАЦИИ
+
+# Показать текущую ветку и статус
+git status
+
+# Показать различия с последним коммитом
+git diff
+
+# Показать различия с индексом
+git diff --staged
+
+# Показать статистику изменений
+git diff --stat
+
+# Показать список файлов в репозитории
+git ls-files
+
+# Показать содержимое конкретного файла из коммита
+git show a1b2c3d:README.md
+
+# Показать автора каждой строки файла
+git blame README.md
+
+# Показать все ветки с последними коммитами
+git branch -v
+
+12. ПРИМЕРЫ ИЗ ЛАБОРАТОРНОЙ РАБОТЫ
+
+# Настройка пользователя
+git config --global user.name "Paltosik92"
+git config --global user.email "denis.leontev92@gmail.com"
+
+# Создание структуры проекта
+cd Documents/
+mkdir Lab2_ISRPO_Leontev
+cd Lab2_ISRPO_Leontev
+mkdir backend
+cd backend
+
+# Инициализация репозитория
+git init -b main
+
+# Создание консольного приложения .NET
+dotnet new console -o Program --use-program-main
+
+# Создание .gitignore
+echo "bin/" > .gitignore
+echo "obj/" >> .gitignore
+echo ".vs/" >> .gitignore
+
+# Добавление файлов и коммит
+git add .
+git commit -m "Initial commit: create console app"
+
+# Подключение удалённого репозитория
+git remote add origin https://gitflic.ru/project/paltosik92/lab2-git_leontev.git
+git remote -v
+
+# Первая отправка
+git push -u origin main
+
+# Внесение изменений и второй коммит
+git add Program/Program.cs
+git commit -m "Add user name input and greeting"
+
+# Просмотр истории
+git log --oneline
+
+# Просмотр конкретного коммита
+git show 4ae0c55fb96acd6020b2e33e877ae3a102bf5000
+
+# Создание ветки feature
+git switch -c feature
+
+# Работа с ветками
+git branch
+git switch main
+git switch -
+git branch -d hotfix
+
+# Отправка ветки на сервер
+git push --set-upstream origin feature
+
+# Обновление main после слияния PR
+git switch main
+git pull
+git branch -D feature
+git fetch --prune
+
+13. ПРОБЛЕМЫ И ИХ РЕШЕНИЯ
+
+# Проблема: "fatal: not a git repository"
+# Решение: вы не в папке репозитория. Проверьте путь:
+pwd
+cd путь_к_репозиторию
+
+# Проблема: "fatal: The current branch feature has no upstream branch"
+# Решение: привязать ветку к удалённой:
+git push --set-upstream origin feature
+
+# Проблема: "Updates were rejected because the remote contains work..."
+# Решение: сначала получить изменения:
+git pull --rebase origin main
+git push
+
+# Проблема: терминал завис с символом ":" внизу
+# Решение: нажмите "q" для выхода из pager (less)
+
+# Проблема: "error: failed to push some refs"
+# Решение: сделать pull, разрешить конфликты, затем push:
+git pull
+# ... разрешение конфликтов ...
+git add .
+git commit -m "Merge conflicts resolved"
+git push
+
+# Проблема: забыли добавить файл в последний коммит
+# Решение: добавить и amend:
+git add забытый_файл.txt
+git commit --amend --no-edit
+
+# Проблема: нужно отменить последний коммит, но сохранить изменения
+# Решение:
+git reset --soft HEAD~1
+
+# Проблема: случайно удалили ветку
+# Решение: найти хеш через reflog и восстановить:
+git reflog
+git branch восстановленная_ветка a1b2c3d
+
+# Проблема: конфликт слияния
+# Решение: открыть конфликтующие файлы, найти маркеры:
+# <<<<<<< HEAD
+# =======
+# >>>>>>> feature
+# Отредактировать, затем:
+git add .
+git commit -m "Resolve merge conflict"
+
+14. ПОЛЕЗНЫЕ СОКРАЩЕНИЯ (ALIASES)
+
+# Настроить сокращения:
+git config --global alias.st status
+git config --global alias.co checkout
+git config --global alias.br branch
+git config --global alias.ci commit
+git config --global alias.lg "log --oneline --graph --all"
+
+# Использование:
+git st      # вместо git status
+git co main # вместо git checkout main
+git lg      # красивый лог
+
+15. ДОПОЛНИТЕЛЬНЫЕ КОМАНДЫ
+
+# Временное сохранение изменений (stash)
+git stash
+git stash list
+git stash pop
+git stash drop
+
+# Просмотр тегов
+git tag
+git tag -a v1.0 -m "Version 1.0"
+git push origin v1.0
+
+# Архивация проекта
+git archive --format=zip HEAD > project.zip
+
+# Поиск по истории
+git log --grep="fix"
+git log -S"function_name"
+
+# Показать, кто и когда менял файл
+git log --follow README.md
